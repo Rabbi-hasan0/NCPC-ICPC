@@ -11,7 +11,6 @@ int gcd (int a, int b) {
     if (b == 0)  return a;
     else return gcd (b, a % b);
 }
-
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
