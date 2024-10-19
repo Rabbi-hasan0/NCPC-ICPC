@@ -16,33 +16,32 @@ int make(int val) {
 }
 
 void precal() {
-  for(int i = 0; i < s.size(); i++) {
-      int size = s[i].size();
-      int y = make(size);
-      int loop = 9 - (size + 1) / 2;
-      int x = stoll(s[i]);  
-      vs[i].push_back(x);
+    for(int i = 0; i < s.size(); i++) {
+        int size = s[i].size();
+        int y = make(size);
+        int loop = 9 - (size + 1) / 2;
+        int x = stoll(s[i]);  
+        vs[i].push_back(x);
 
-      while(loop--) {
-          x += y;
-          vs[i].push_back(x);
-      }
-  }
-}
-void solved() {
-    int l, r;
-    cin >> l >> r;
-    int n;
-    cin >> n;
-    int ans = 0;
-    for(int i = 0; i < 12; i++) {
-      if(vs[i][0] < l) continue;
-      if(vs[i][0] > r) break;
-      for(int j = 0; j < vs[i].size(); j++) {
-        if(vs[i][j] % n == 0 and vs[i][j] >= l and vs[i][j] <= r) {
-          ans++;
+        while(loop--) {
+            x += y;
+            vs[i].push_back(x);
         }
-      } 
+    }
+}
+
+void solved() {
+    int l, r, n;
+    cin >> l >> r >> n;
+    int ans = 0;
+    for(int i = 0; i < s.size(); i++) {
+        for(int j = 0; j < vs[i].size(); j++) {
+            int val = vs[i][j];
+            if(val > r) break;
+            if(val >= l && val % n == 0) {
+                ans++;
+            }
+        }
     }
     cout << ans << '\n';
 }
@@ -50,8 +49,11 @@ void solved() {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+
     precal();
-    int t; cin >> t;
+
+    int t; 
+    cin >> t;
     for(int i = 1; i <= t; i++) {
         cout << "Case #" << i << ": ";
         solved();
